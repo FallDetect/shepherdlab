@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FallGuard+ — AI Wheelchair Fall Detection · ShepherdLab</title>
+<meta name="description" content="Mount any Android phone to a wheelchair. AI monitors posture 24/7 and sends instant Telegram alerts when a fall is detected. From SGD $15/month.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D1B2A;--navy2:#122030;--navy3:#1A2E42;
+  --teal:#00A896;--teal-dk:#007A6E;--teal-lt:rgba(0,168,150,0.12);--teal-glow:rgba(0,168,150,0.2);
+  --fg:#E8734A;--fg-lt:rgba(232,115,74,0.12);--fg-glow:rgba(232,115,74,0.2);
+  --white:#FFFFFF;--muted:#8BA0B4;--border:rgba(255,255,255,0.08);--border-fg:rgba(232,115,74,0.3);--r:12px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;font-size:16px;color:var(--white);background:var(--navy);line-height:1.65;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:'DM Serif Display',serif;font-size:1.35rem;color:var(--white);text-decoration:none;letter-spacing:-0.02em}
+.logo span{color:var(--teal)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:0.88rem;font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.btn{display:inline-block;padding:0.65rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:500;text-decoration:none;transition:all 0.2s;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
+.btn-fg{background:var(--fg);color:var(--white)}
+.btn-fg:hover{background:#D4623E;transform:translateY(-1px)}
+.btn-outline-fg{background:transparent;color:var(--fg);border:1px solid var(--border-fg)}
+.btn-outline-fg:hover{background:var(--fg-lt)}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-ghost:hover{color:var(--white);border-color:var(--muted)}
+.btn-teal{background:var(--teal);color:var(--navy);font-weight:600}
+.btn-teal:hover{background:#00BFA8}
+.btn-lg{padding:0.9rem 2.2rem;font-size:1rem}
+
+/* HERO */
+.hero{padding:5.5rem 2.5rem 5rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(232,115,74,0.07) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:var(--fg-lt);color:var(--fg);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:4px;margin-bottom:1.5rem;border:1px solid var(--border-fg)}
+.hero h1{font-family:'DM Serif Display',serif;font-size:3rem;line-height:1.1;letter-spacing:-0.03em;color:var(--white);margin-bottom:1.2rem}
+.hero h1 em{font-style:italic;color:var(--fg)}
+.hero-sub{font-size:1rem;color:var(--muted);margin-bottom:2rem;max-width:460px;line-height:1.75}
+.hero-actions{display:flex;gap:0.9rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.hero-note{font-size:0.8rem;color:var(--muted)}
+.hero-note span{margin-right:1.25rem}
+
+/* PHONE MOCKUP */
+.phone{background:var(--navy2);border:1px solid var(--border);border-radius:28px;padding:1.75rem 1.5rem;max-width:270px;margin:0 auto;box-shadow:0 40px 80px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.05)}
+.phone-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.phone-app{font-size:0.78rem;font-weight:600;color:var(--white)}
+.live-pill{display:flex;align-items:center;gap:0.35rem;font-size:0.65rem;color:#2ECC71;background:rgba(46,204,113,0.1);padding:0.2rem 0.5rem;border-radius:3px;border:1px solid rgba(46,204,113,0.2)}
+.ldot{width:5px;height:5px;border-radius:50%;background:#2ECC71;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.sk-view{background:#0A1520;border-radius:10px;height:130px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+.sk-body{position:relative;width:55px;height:110px}
+.ln{position:absolute;background:#00A896;border-radius:2px}
+.head{width:18px;height:18px;border-radius:50%;border:2px solid #00A896;top:0;left:50%;transform:translateX(-50%);background:transparent}
+.spine{width:2px;height:38px;top:20px;left:50%;transform:translateX(-50%)}
+.shl{width:26px;height:2px;top:26px;left:2px}
+.shr{width:26px;height:2px;top:26px;right:2px}
+.arl{width:2px;height:24px;top:28px;left:5px;transform:rotate(12deg)}
+.arr{width:2px;height:24px;top:28px;right:5px;transform:rotate(-12deg)}
+.hipl{width:18px;height:2px;top:60px;left:9px}
+.hipr{width:18px;height:2px;top:60px;right:9px}
+.legl{width:2px;height:34px;top:62px;left:15px;transform:rotate(4deg)}
+.legr{width:2px;height:34px;top:62px;right:15px;transform:rotate(-4deg)}
+.sk-label{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);font-size:0.6rem;color:#00A896;white-space:nowrap;letter-spacing:0.06em;opacity:0.8}
+.alert-box{background:rgba(232,115,74,0.08);border:1px solid rgba(232,115,74,0.25);border-radius:8px;padding:0.65rem 0.8rem;margin-bottom:0.75rem}
+.alert-hd{color:var(--fg);font-size:0.75rem;font-weight:600;margin-bottom:0.2rem}
+.alert-bd{color:var(--muted);font-size:0.68rem;line-height:1.5}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
+.metric{background:rgba(255,255,255,0.04);border-radius:8px;padding:0.55rem;text-align:center;border:1px solid var(--border)}
+.metric-v{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--white)}
+.metric-l{font-size:0.6rem;color:var(--muted);margin-top:0.1rem}
+
+/* TRUST */
+.trust{display:flex;border-bottom:1px solid var(--border);overflow-x:auto}
+.ti{flex:1;min-width:150px;padding:1.75rem 2rem;text-align:center;border-right:1px solid var(--border)}
+.ti:last-child{border-right:none}
+.tn{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--white)}
+.tl{font-size:0.78rem;color:var(--muted);margin-top:0.25rem}
+
+/* SECTION */
+.section{padding:5rem 2.5rem}
+.si{max-width:1100px;margin:0 auto}
+.slbl{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--teal);margin-bottom:0.6rem}
+.slbl-fg{color:var(--fg)}
+.stitle{font-family:'DM Serif Display',serif;font-size:2.3rem;color:var(--white);letter-spacing:-0.02em;line-height:1.2;margin-bottom:0.9rem}
+.ssub{font-size:1rem;color:var(--muted);max-width:540px;margin-bottom:3.5rem}
+
+/* FEATURES GRID */
+.fg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);border-radius:16px;overflow:hidden}
+.fc{background:var(--navy2);padding:1.75rem;transition:background 0.2s}
+.fc:hover{background:var(--navy3)}
+.ficon{font-size:1.5rem;margin-bottom:0.9rem}
+.ftitle{font-weight:600;font-size:0.95rem;color:var(--white);margin-bottom:0.4rem}
+.fdesc{font-size:0.85rem;color:var(--muted);line-height:1.6}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:var(--border);border-radius:16px;overflow:hidden}
+.how-step{background:var(--navy2);padding:1.75rem 1.25rem;text-align:center;border-right:1px solid var(--border)}
+.how-step:last-child{border-right:none}
+.how-circle{width:48px;height:48px;border-radius:50%;background:var(--teal-lt);border:1px solid rgba(0,168,150,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.2rem}
+.how-num{font-size:0.65rem;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem}
+.how-title{font-weight:600;font-size:0.85rem;color:var(--white);margin-bottom:0.35rem}
+.how-desc{font-size:0.78rem;color:var(--muted);line-height:1.5}
+
+/* COMPARISON */
+.cmp-wrap{overflow-x:auto;border-radius:16px;overflow:hidden;border:1px solid var(--border)}
+.cmp-table{width:100%;border-collapse:collapse;font-size:0.88rem}
+.cmp-table th{padding:1rem 1.25rem;text-align:left;background:var(--navy2);font-weight:600;font-size:0.8rem;color:var(--muted);border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:0.06em}
+.cmp-table th.hl{background:rgba(232,115,74,0.08);color:var(--fg)}
+.cmp-table td{padding:0.85rem 1.25rem;border-bottom:1px solid var(--border);color:var(--muted)}
+.cmp-table td.hl{background:rgba(232,115,74,0.04)}
+.cmp-table tr:last-child td{border-bottom:none}
+.ck{color:var(--teal);font-weight:700}
+.ck-fg{color:var(--fg);font-weight:700}
+.cx{color:rgba(255,255,255,0.15)}
+
+/* TESTIMONIALS */
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);border-radius:16px;overflow:hidden}
+.tc{background:var(--navy2);padding:1.75rem}
+.t-stars{color:var(--fg);font-size:0.8rem;letter-spacing:0.1em;margin-bottom:0.75rem}
+.t-q{font-size:0.9rem;color:var(--muted);line-height:1.75;margin-bottom:1.25rem;font-style:italic}
+.t-auth{display:flex;align-items:center;gap:0.75rem}
+.t-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:0.78rem;flex-shrink:0}
+.t-name{font-weight:600;font-size:0.85rem;color:var(--white)}
+.t-role{font-size:0.75rem;color:var(--muted)}
+
+/* PRICING */
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);border-radius:16px;overflow:hidden;max-width:700px;margin:0 auto}
+.pc{background:var(--navy2);padding:2.25rem;position:relative}
+.pc.featured{background:var(--navy3)}
+.feat-tag{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--teal);color:var(--navy);font-size:0.68rem;font-weight:700;padding:0.25rem 1rem;border-radius:0 0 6px 6px;white-space:nowrap}
+.plan-name{font-weight:600;font-size:0.88rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.6rem}
+.plan-price{font-family:'DM Serif Display',serif;font-size:2.4rem;color:var(--white);margin-bottom:0.25rem}
+.plan-period{font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem}
+.plan-feats{list-style:none;margin-bottom:1.75rem}
+.plan-feats li{font-size:0.86rem;padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem;color:var(--muted)}
+.plan-feats li::before{content:'✓';color:var(--teal);font-weight:700;flex-shrink:0}
+.plan-feats li.no{opacity:0.4}
+.plan-feats li.no::before{content:'–';color:var(--muted)}
+
+/* FAQ */
+.faq{max-width:660px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border);padding:1.25rem 0}
+.faq-q{font-weight:600;font-size:0.92rem;color:var(--white);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.faq-toggle{color:var(--teal);font-size:1.1rem;flex-shrink:0}
+.faq-a{font-size:0.88rem;color:var(--muted);line-height:1.75;margin-top:0.75rem}
+
+/* BOTTOM CTA */
+.cta-box{background:var(--navy2);border:1px solid var(--border);border-radius:20px;padding:4rem;text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;background:radial-gradient(ellipse,rgba(232,115,74,0.06) 0%,transparent 70%);pointer-events:none}
+.cta-box h2{font-family:'DM Serif Display',serif;font-size:2.4rem;color:var(--white);margin-bottom:0.75rem;position:relative}
+.cta-box p{color:var(--muted);font-size:1rem;max-width:440px;margin:0 auto 2.25rem;position:relative}
+.cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+
+/* FOOTER */
+footer{background:var(--navy2);border-top:1px solid var(--border);padding:4rem 2.5rem 2.5rem}
+.fi{max-width:1100px;margin:0 auto}
+.ft{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.flogo{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--white);text-decoration:none}
+.flogo span{color:var(--teal)}
+.finfo{font-size:0.78rem;color:var(--muted);margin-top:0.75rem;line-height:1.8}
+.fcol h4{color:var(--white);font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem}
+.fcol ul{list-style:none}
+.fcol li{margin-bottom:0.5rem}
+.fcol a{color:var(--muted);text-decoration:none;font-size:0.83rem;transition:color 0.2s}
+.fcol a:hover{color:var(--white)}
+.fb{display:flex;justify-content:space-between;font-size:0.76rem;color:rgba(255,255,255,0.25);flex-wrap:wrap;gap:0.5rem}
+
+@media(max-width:900px){
+  .hero-inner,.fg-grid,.t-grid,.price-grid{grid-template-columns:1fr}
+  .fg-grid,.t-grid,.price-grid{background:transparent;gap:1rem}
+  .fc,.tc,.pc{border-radius:var(--r);border:1px solid var(--border)}
+  .how-grid{grid-template-columns:1fr 1fr;background:transparent;gap:1rem}
+  .how-step{border-radius:var(--r);border:1px solid var(--border)}
+  .hero h1{font-size:2.3rem}
+  .ft{grid-template-columns:1fr 1fr;gap:2rem}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Shepherd<span>Lab</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="fallguard.html" style="color:var(--fg)">FallGuard+</a></li>
+    <li><a href="safewatch.html">SafeWatch+</a></li>
+    <li><a href="mailto:hello@shepherdlab.life">Contact</a></li>
+  </ul>
+  <a href="#pricing" class="btn btn-fg">Get started from $15/mo</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">📱 FallGuard+ · AI Fall Detection</div>
+      <h1>The fall alarm that's<br><em>always watching.</em></h1>
+      <p class="hero-sub">Mount any Android phone to a wheelchair. AI monitors posture 24/7 and sends an instant Telegram alert when a fall is detected — in under 3 seconds.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-fg btn-lg">Start for $15/month</a>
+        <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
+      </div>
+      <div class="hero-note">
+        <span>✓ No contract</span>
+        <span>✓ No hardware needed</span>
+        <span>✓ Cancel anytime</span>
+      </div>
+    </div>
+    <div>
+      <div class="phone">
+        <div class="phone-bar">
+          <div class="phone-app">FallGuard+</div>
+          <div class="live-pill"><div class="ldot"></div>Live · Peter</div>
+        </div>
+        <div class="sk-view">
+          <div class="sk-body">
+            <div class="head"></div>
+            <div class="ln spine"></div>
+            <div class="ln shl"></div><div class="ln shr"></div>
+            <div class="ln arl"></div><div class="ln arr"></div>
+            <div class="ln hipl"></div><div class="ln hipr"></div>
+            <div class="ln legl"></div><div class="ln legr"></div>
+          </div>
+          <div class="sk-label">● MONITORING</div>
+        </div>
+        <div class="alert-box">
+          <div class="alert-hd">🚨 Fall Detected</div>
+          <div class="alert-bd">Peter · Living Room · 11:34am<br>Spine angle +42° · Alert sent in 2.1s</div>
+        </div>
+        <div class="metrics">
+          <div class="metric"><div class="metric-v">2.1s</div><div class="metric-l">detection</div></div>
+          <div class="metric"><div class="metric-v">11h</div><div class="metric-l">battery</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="ti"><div class="tn">&lt;3s</div><div class="tl">fall detection time</div></div>
+  <div class="ti"><div class="tn">$15</div><div class="tl">per month, Basic</div></div>
+  <div class="ti"><div class="tn">0</div><div class="tl">extra hardware needed</div></div>
+  <div class="ti"><div class="tn">11h</div><div class="tl">battery life</div></div>
+  <div class="ti"><div class="tn">5 min</div><div class="tl">setup time</div></div>
+</div>
+
+<section class="section">
+  <div class="si">
+    <div class="slbl slbl-fg">What FallGuard+ Does</div>
+    <h2 class="stitle">More than fall detection.</h2>
+    <p class="ssub">A complete monitoring solution — catching problems before they become emergencies.</p>
+    <div class="fg-grid">
+      <div class="fc"><div class="ficon">⚠️</div><div class="ftitle">Fall Detection</div><p class="fdesc">Side and forward falls detected in under 3 seconds. Alarm on phone + Telegram alert to caregiver.</p></div>
+      <div class="fc"><div class="ficon">🪑</div><div class="ftitle">Posture Deterioration</div><p class="fdesc">Gradual slumping detected before it becomes a fall. Preventive alert gives caregivers time to act.</p></div>
+      <div class="fc"><div class="ficon">🚶</div><div class="ftitle">Absence Detection</div><p class="fdesc">Alert fires when patient is absent from wheelchair for 30+ seconds — may have left unassisted.</p></div>
+      <div class="fc"><div class="ficon">😤</div><div class="ftitle">Agitation Alert</div><p class="fdesc">Sustained unusual movement detected. Indicates discomfort, pain or distress before it escalates.</p></div>
+      <div class="fc"><div class="ficon">📳</div><div class="ftitle">Inactivity Alert</div><p class="fdesc">Configurable reminder after prolonged stillness. Helps prevent pressure sores with timely repositioning.</p></div>
+      <div class="fc"><div class="ficon">😴</div><div class="ftitle">Head Drop Detection</div><p class="fdesc">Drowsiness or potential medical episode detected. Head drops below threshold triggers immediate alert.</p></div>
+      <div class="fc"><div class="ficon">🎙️</div><div class="ftitle">Distress Sound</div><p class="fdesc">Microphone monitors for cries, coughing or distress sounds. Alert sent with audio context.</p></div>
+      <div class="fc"><div class="ficon">📈</div><div class="ftitle">Daily Fall Risk Score</div><p class="fdesc">AI computes Low / Medium / High risk score daily based on posture trends and activity patterns.</p></div>
+      <div class="fc"><div class="ficon">📅</div><div class="ftitle">Weekly PDF Report</div><p class="fdesc">Auto-emailed to family every Sunday. Falls, posture trends, AI recommendations. Pro plan.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)" id="how">
+  <div class="si">
+    <div class="slbl">Getting Started</div>
+    <h2 class="stitle">Set up in 5 minutes.</h2>
+    <p class="ssub">No technician. No special hardware. Just a smartphone and a $10 holder from Shopee.</p>
+    <div class="how-grid">
+      <div class="how-step"><div class="how-circle">📱</div><div class="how-num">Step 1</div><div class="how-title">Download the app</div><p class="how-desc">Any Android phone from 2019+. Free download. No special device needed.</p></div>
+      <div class="how-step"><div class="how-circle">🔩</div><div class="how-num">Step 2</div><div class="how-title">Mount the phone</div><p class="how-desc">$10 holder from Shopee. Front camera faces the patient. Takes 2 minutes.</p></div>
+      <div class="how-step"><div class="how-circle">💬</div><div class="how-num">Step 3</div><div class="how-title">Connect Telegram</div><p class="how-desc">Message @userinfobot, get your Chat ID, enter it in the app. 2 minutes.</p></div>
+      <div class="how-step"><div class="how-circle">🧠</div><div class="how-num">Step 4</div><div class="how-title">AI calibrates</div><p class="how-desc">Tap Start. AI detects 4 body points and sets baseline posture in 30 seconds.</p></div>
+      <div class="how-step"><div class="how-circle">✅</div><div class="how-num">Step 5</div><div class="how-title">Protected 24/7</div><p class="how-desc">Monitoring active. Alerted within 3 seconds if anything happens.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="si">
+    <div class="slbl slbl-fg">Why FallGuard+</div>
+    <h2 class="stitle">The only solution that does it all.</h2>
+    <p class="ssub" style="margin-bottom:2.5rem">Wheelchair-mounted. No wearables. Fall AND posture detection. Fraction of the cost.</p>
+    <div class="cmp-wrap">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="hl">FallGuard+</th>
+            <th>Room Camera</th>
+            <th>Wearable Pendant</th>
+            <th>Call Bell</th>
+            <th>Bed Sensor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>No patient compliance needed</td><td class="hl"><span class="ck-fg">✓</span></td><td><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="ck">✓</span></td></tr>
+          <tr><td>Detects fall in under 3 seconds</td><td class="hl"><span class="ck-fg">✓</span></td><td><span class="ck">✓</span></td><td><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td style="color:var(--muted)">Maybe</td></tr>
+          <tr><td>Posture deterioration alert</td><td class="hl"><span class="ck-fg">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td>Works outdoors &amp; in transit</td><td class="hl"><span class="ck-fg">✓</span></td><td><span class="cx">✗</span></td><td><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td>Monthly cost (SGD)</td><td class="hl" style="color:var(--fg);font-weight:600">$15–20</td><td>$45+</td><td>$18 + $300 device</td><td>Free</td><td>$1,200+</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="si">
+    <div class="slbl slbl-fg">Stories from families</div>
+    <h2 class="stitle">Real peace of mind.</h2>
+    <p class="ssub">From families who use FallGuard+ every day.</p>
+    <div class="t-grid">
+      <div class="tc"><div class="t-stars">★★★★★</div><p class="t-q">"I was overseas when the alert came. I could see Mum on the live camera — conscious. I called the helper immediately. Helped within 2 minutes. Without FallGuard+, no one would have known for hours."</p><div class="t-auth"><div class="t-av" style="background:rgba(46,204,113,0.1);color:#2ECC71">SL</div><div><div class="t-name">Shaun L.</div><div class="t-role">Son, working in London</div></div></div></div>
+      <div class="tc"><div class="t-stars">★★★★★</div><p class="t-q">"The posture deterioration alert fired before Dad actually fell. The caregiver adjusted his position and the fall was prevented entirely. That feature alone was worth every cent."</p><div class="t-auth"><div class="t-av" style="background:rgba(0,168,150,0.1);color:var(--teal)">MP</div><div><div class="t-name">Michelle P.</div><div class="t-role">Daughter, Singapore</div></div></div></div>
+      <div class="tc"><div class="t-stars">★★★★★</div><p class="t-q">"We have 4 people in the house but nobody can watch Grandma all the time. FallGuard+ gives us all peace of mind. The weekly report shows how she's doing even when we're busy."</p><div class="t-auth"><div class="t-av" style="background:rgba(232,115,74,0.1);color:var(--fg)">RT</div><div><div class="t-name">Raj T.</div><div class="t-role">Family caregiver, Tampines</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <div class="si">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <div class="slbl slbl-fg" style="text-align:center">Pricing</div>
+      <h2 class="stitle" style="text-align:center">Simple, transparent pricing.</h2>
+      <p style="font-size:0.95rem;color:var(--muted);text-align:center">No hidden fees. No contracts. App download is free. Cancel anytime.</p>
+    </div>
+    <div class="price-grid">
+      <div class="pc">
+        <div class="plan-name">Basic</div>
+        <div class="plan-price">$15</div>
+        <div class="plan-period">/ month · or $171/year (save 5%)</div>
+        <ul class="plan-feats">
+          <li>Fall detection + Telegram alerts</li>
+          <li>All safety alerts (Phase 2A)</li>
+          <li>Live skeleton monitoring</li>
+          <li>Absence + agitation + inactivity alerts</li>
+          <li>Event history log (on phone)</li>
+          <li class="no">Remote live camera</li>
+          <li class="no">Weekly PDF family report</li>
+          <li class="no">Fall risk AI score</li>
+        </ul>
+        <a href="mailto:hello@shepherdlab.life?subject=FallGuard+ Basic" class="btn btn-outline-fg" style="width:100%;text-align:center;display:block">Get started</a>
+      </div>
+      <div class="pc featured">
+        <div class="feat-tag">Most popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$20</div>
+        <div class="plan-period">/ month · or $228/year (save 5%)</div>
+        <ul class="plan-feats">
+          <li>Everything in Basic</li>
+          <li>Remote live camera (anywhere)</li>
+          <li>Weekly PDF health report (emailed)</li>
+          <li>Daily health summary email</li>
+          <li>Fall risk AI score (daily)</li>
+          <li>Cloud event history</li>
+          <li>Multi-caregiver access</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="mailto:hello@shepherdlab.life?subject=FallGuard+ Pro" class="btn btn-teal" style="width:100%;text-align:center;display:block">Get started</a>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:1.5rem;font-size:0.8rem;color:var(--muted)">Phone holder ~$10 one-time from Shopee · App download free · Cancel anytime</p>
+  </div>
+</section>
+
+<section class="section" style="background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="si">
+    <div style="text-align:center;margin-bottom:3rem">
+      <div class="slbl" style="text-align:center">FAQ</div>
+      <h2 class="stitle" style="text-align:center">Common questions.</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item"><div class="faq-q">What phone do I need? <span class="faq-toggle">+</span></div><div class="faq-a">Any Android phone from 2019 onwards works. iPhone support is on the roadmap. Most families use an old spare phone.</div></div>
+      <div class="faq-item"><div class="faq-q">Does the patient need to do anything? <span class="faq-toggle">+</span></div><div class="faq-a">Nothing at all. The phone mounts on the wheelchair and monitors automatically. No wearables, no buttons to press.</div></div>
+      <div class="faq-item"><div class="faq-q">How does Telegram work? <span class="faq-toggle">+</span></div><div class="faq-a">Install Telegram (free), message @userinfobot to get your Chat ID, enter it in FallGuard+. Takes 2 minutes. All alerts come to your Telegram.</div></div>
+      <div class="faq-item"><div class="faq-q">Does it work outdoors and in transport? <span class="faq-toggle">+</span></div><div class="faq-a">Yes. FallGuard+ works anywhere the phone has a view of the patient and an internet connection — parks, hospital trips, taxis.</div></div>
+      <div class="faq-item"><div class="faq-q">Where is my data stored? <span class="faq-toggle">+</span></div><div class="faq-a">All data is stored in Singapore and handled in accordance with Singapore's PDPA. We do not share or sell your data.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I cancel anytime? <span class="faq-toggle">+</span></div><div class="faq-a">Yes. No contracts, no cancellation fees. Cancel anytime from within the app or by emailing us.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="si">
+    <div class="cta-box">
+      <h2>Start protecting your loved one today.</h2>
+      <p>Set up in 5 minutes. From SGD $15 per month. No contract, no hardware, no stress.</p>
+      <div class="cta-actions">
+        <a href="mailto:hello@shepherdlab.life?subject=FallGuard+ Sign Up" class="btn btn-fg btn-lg">Get started — from $15/mo</a>
+        <a href="safewatch.html" class="btn btn-ghost btn-lg">Explore SafeWatch+ →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="ft">
+      <div>
+        <a href="index.html" class="flogo">Shepherd<span>Lab</span></a>
+        <p class="finfo">ShepherdLab is a division of NHB Industrial Pte Ltd<br>UEN 202542682D<br>5038 Ang Mo Kio Industrial Park 2, #01-409<br>Singapore 569541</p>
+      </div>
+      <div class="fcol"><h4>Products</h4><ul><li><a href="fallguard.html">FallGuard+</a></li><li><a href="safewatch.html">SafeWatch+</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div class="fcol"><h4>Company</h4><ul><li><a href="index.html#about">About</a></li><li><a href="mailto:hello@shepherdlab.life">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+      <div class="fcol"><h4>Contact</h4><ul><li><a href="mailto:hello@shepherdlab.life">hello@shepherdlab.life</a></li><li><a href="https://shepherdlab.life">shepherdlab.life</a></li></ul></div>
+    </div>
+    <div class="fb">
+      <span>© 2026 NHB Industrial Pte Ltd (UEN 202542682D). All rights reserved.</span>
+      <span>🇸🇬 Data stays in Singapore · PDPA compliant</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

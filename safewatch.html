@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeWatch+ — Room-Wide AI Care Monitoring · ShepherdLab</title>
+<meta name="description" content="IP cameras + AI = complete care monitoring for homes, nursing homes and hospitals. Multi-person tracking, fall detection, gait analysis. No wearables needed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D1B2A;--navy2:#122030;--navy3:#1A2E42;
+  --teal:#00A896;--teal-dk:#007A6E;--teal-lt:rgba(0,168,150,0.12);--teal-glow:rgba(0,168,150,0.2);
+  --white:#FFFFFF;--muted:#8BA0B4;--border:rgba(255,255,255,0.08);--border-t:rgba(0,168,150,0.3);--r:12px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;font-size:16px;color:var(--white);background:var(--navy);line-height:1.65;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:'DM Serif Display',serif;font-size:1.35rem;color:var(--white);text-decoration:none;letter-spacing:-0.02em}
+.logo span{color:var(--teal)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:0.88rem;font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.btn{display:inline-block;padding:0.65rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:500;text-decoration:none;transition:all 0.2s;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
+.btn-teal{background:var(--teal);color:var(--navy);font-weight:600}
+.btn-teal:hover{background:#00BFA8;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--teal);border:1px solid var(--border-t)}
+.btn-outline:hover{background:var(--teal-lt)}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-ghost:hover{color:var(--white);border-color:var(--muted)}
+.btn-lg{padding:0.9rem 2.2rem;font-size:1rem}
+
+/* HERO */
+.hero{padding:5.5rem 2.5rem 5rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(0,168,150,0.07) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:var(--teal-lt);color:var(--teal);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:4px;margin-bottom:1.5rem;border:1px solid var(--border-t)}
+.hero h1{font-family:'DM Serif Display',serif;font-size:3rem;line-height:1.1;letter-spacing:-0.03em;color:var(--white);margin-bottom:1.2rem}
+.hero h1 em{font-style:italic;color:var(--teal)}
+.hero-sub{font-size:1rem;color:var(--muted);margin-bottom:2rem;max-width:460px;line-height:1.75}
+.hero-actions{display:flex;gap:0.9rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.demo-note{font-size:0.8rem;color:var(--muted);font-style:italic}
+
+/* DASHBOARD MOCKUP */
+.dash{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;box-shadow:0 40px 80px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.04)}
+.dash-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:0.9rem;border-bottom:1px solid var(--border)}
+.dash-title{font-size:0.8rem;font-weight:600;color:var(--white)}
+.live-badge{display:flex;align-items:center;gap:0.35rem;font-size:0.65rem;color:var(--teal);background:var(--teal-lt);padding:0.2rem 0.55rem;border-radius:3px;border:1px solid var(--border-t)}
+.ldot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.cam-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:0.7rem}
+.cam{background:#0A1520;border-radius:8px;padding:0.5rem 0.65rem;aspect-ratio:16/9;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+.cam-lbl{font-size:0.58rem;color:rgba(255,255,255,0.4);letter-spacing:0.05em}
+.sk-m{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:26px;height:50px}
+.lm{position:absolute;background:var(--teal);border-radius:1px;opacity:0.85}
+.mh{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--teal);top:0;left:50%;transform:translateX(-50%);background:transparent}
+.ms{width:1.5px;height:17px;top:10px;left:50%;transform:translateX(-50%)}
+.msl{width:12px;height:1.5px;top:13px;left:1px}
+.msr{width:12px;height:1.5px;top:13px;right:1px}
+.mal{width:1.5px;height:11px;top:14px;left:3px;transform:rotate(10deg)}
+.mar{width:1.5px;height:11px;top:14px;right:3px;transform:rotate(-10deg)}
+.mhl{width:8px;height:1.5px;top:28px;left:6px}
+.mhr{width:8px;height:1.5px;top:28px;right:6px}
+.mll{width:1.5px;height:14px;top:30px;left:9px;transform:rotate(3deg)}
+.mlr{width:1.5px;height:14px;top:30px;right:9px;transform:rotate(-3deg)}
+.cam-tag{position:absolute;bottom:4px;left:4px;background:rgba(0,168,150,0.85);color:var(--navy);font-size:0.55rem;padding:1px 5px;border-radius:3px;font-weight:700}
+.cam-tag.unknown{background:rgba(100,120,140,0.7);color:var(--white)}
+.cam-empty{display:flex;align-items:center;justify-content:center;height:100%}
+.cam-empty-txt{font-size:0.62rem;color:rgba(255,255,255,0.2)}
+.status-bar{background:rgba(0,168,150,0.06);border:1px solid rgba(0,168,150,0.15);border-radius:6px;padding:0.5rem 0.75rem;font-size:0.7rem;color:var(--teal);margin-bottom:0.65rem}
+.people-chips{display:flex;gap:0.45rem;flex-wrap:wrap}
+.chip{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;padding:0.3rem 0.6rem;display:flex;align-items:center;gap:0.35rem;font-size:0.65rem;color:var(--muted)}
+.dot-on{width:5px;height:5px;border-radius:50%;background:#2ECC71;flex-shrink:0}
+.dot-off{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.2);flex-shrink:0}
+
+/* TRUST */
+.trust{display:flex;border-bottom:1px solid var(--border);overflow-x:auto}
+.ti{flex:1;min-width:150px;padding:1.75rem 2rem;text-align:center;border-right:1px solid var(--border)}
+.ti:last-child{border-right:none}
+.tn{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--white)}
+.tl{font-size:0.78rem;color:var(--muted);margin-top:0.25rem}
+
+/* SECTION */
+.section{padding:5rem 2.5rem}
+.si{max-width:1100px;margin:0 auto}
+.slbl{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--teal);margin-bottom:0.6rem}
+.stitle{font-family:'DM Serif Display',serif;font-size:2.3rem;color:var(--white);letter-spacing:-0.02em;line-height:1.2;margin-bottom:0.9rem}
+.ssub{font-size:1rem;color:var(--muted);max-width:540px;margin-bottom:3.5rem}
+
+/* FEATURES */
+.fg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);border-radius:16px;overflow:hidden}
+.fc{background:var(--navy2);padding:1.75rem;transition:background 0.2s}
+.fc:hover{background:var(--navy3)}
+.ficon{font-size:1.5rem;margin-bottom:0.9rem}
+.ftitle{font-weight:600;font-size:0.95rem;color:var(--white);margin-bottom:0.4rem}
+.fdesc{font-size:0.85rem;color:var(--muted);line-height:1.6}
+
+/* USE CASES */
+.uc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--border);border-radius:16px;overflow:hidden}
+.uc{background:var(--navy2);padding:2.5rem}
+.uc-icon{font-size:1.75rem;margin-bottom:1.25rem}
+.uc-title{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.65rem}
+.uc-desc{font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
+.uc-list{list-style:none}
+.uc-list li{font-size:0.86rem;color:var(--muted);padding:0.3rem 0;display:flex;align-items:center;gap:0.5rem}
+.uc-list li::before{content:'▸';color:var(--teal);font-size:0.75rem;flex-shrink:0}
+
+/* HOW */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);border-radius:16px;overflow:hidden}
+.hw{background:var(--navy2);padding:2rem}
+.hw-num{font-family:'DM Serif Display',serif;font-size:2.5rem;color:rgba(0,168,150,0.2);line-height:1;margin-bottom:1rem}
+.hw-title{font-weight:600;font-size:0.95rem;color:var(--white);margin-bottom:0.5rem}
+.hw-desc{font-size:0.85rem;color:var(--muted);line-height:1.6}
+
+/* TECH */
+.tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border);border-radius:16px;overflow:hidden}
+.tch{background:var(--navy2);padding:1.75rem;text-align:center}
+.tch-icon{font-size:1.75rem;margin-bottom:0.75rem}
+.tch-title{font-weight:600;font-size:0.9rem;color:var(--white);margin-bottom:0.35rem}
+.tch-desc{font-size:0.8rem;color:var(--muted);line-height:1.5}
+
+/* DEMO CTA */
+.cta-box{background:var(--navy2);border:1px solid var(--border);border-radius:20px;padding:4rem;text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(0,168,150,0.06) 0%,transparent 70%);pointer-events:none}
+.cta-box h2{font-family:'DM Serif Display',serif;font-size:2.6rem;color:var(--white);margin-bottom:0.75rem;line-height:1.15;position:relative}
+.cta-box p{color:var(--muted);font-size:1rem;max-width:460px;margin:0 auto 2rem;position:relative}
+.demo-chips{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:2rem;position:relative}
+.demo-chip{background:rgba(0,168,150,0.06);color:var(--muted);font-size:0.78rem;padding:0.3rem 0.85rem;border-radius:4px;border:1px solid rgba(0,168,150,0.15)}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+
+/* FOOTER */
+footer{background:var(--navy2);border-top:1px solid var(--border);padding:4rem 2.5rem 2.5rem}
+.fi{max-width:1100px;margin:0 auto}
+.ft{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.flogo{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--white);text-decoration:none}
+.flogo span{color:var(--teal)}
+.finfo{font-size:0.78rem;color:var(--muted);margin-top:0.75rem;line-height:1.8}
+.fcol h4{color:var(--white);font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem}
+.fcol ul{list-style:none}
+.fcol li{margin-bottom:0.5rem}
+.fcol a{color:var(--muted);text-decoration:none;font-size:0.83rem;transition:color 0.2s}
+.fcol a:hover{color:var(--white)}
+.fb{display:flex;justify-content:space-between;font-size:0.76rem;color:rgba(255,255,255,0.25);flex-wrap:wrap;gap:0.5rem}
+
+@media(max-width:900px){
+  .hero-inner,.fg-grid,.uc-grid,.how-grid,.tech-grid{grid-template-columns:1fr}
+  .tech-grid{grid-template-columns:1fr 1fr}
+  .fg-grid,.uc-grid,.how-grid,.tech-grid{background:transparent;gap:1rem}
+  .fc,.uc,.hw,.tch{border-radius:var(--r);border:1px solid var(--border)}
+  .hero h1{font-size:2.3rem}
+  .ft{grid-template-columns:1fr 1fr;gap:2rem}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Shepherd<span>Lab</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="fallguard.html">FallGuard+</a></li>
+    <li><a href="safewatch.html" style="color:var(--teal)">SafeWatch+</a></li>
+    <li><a href="mailto:hello@shepherdlab.life">Contact</a></li>
+  </ul>
+  <a href="#demo" class="btn btn-teal">Request a demo</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">📷 SafeWatch+ · Room-Wide AI Monitoring</div>
+      <h1>Every person. Every room.<br><em>Always watching.</em></h1>
+      <p class="hero-sub">IP cameras + AI = complete care monitoring for homes, nursing homes and hospitals. Each person identified and monitored individually — no wearables needed.</p>
+      <div class="hero-actions">
+        <a href="#demo" class="btn btn-teal btn-lg">Request a demo</a>
+        <a href="#how" class="btn btn-ghost btn-lg">How it works</a>
+      </div>
+      <p class="demo-note">Tailored demos for homes and facilities. No commitment required.</p>
+      <div style="margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:0.5rem">
+        <span style="background:var(--teal-lt);color:var(--teal);border:1px solid var(--border-t);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:4px;font-weight:500">✓ Works with most existing IP cameras</span>
+        <span style="background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid var(--border);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:4px">Tapo · Hikvision · Reolink · and more</span>
+      </div>
+<div style="margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:0.5rem">
+  <span style="background:var(--teal-lt);color:var(--teal);border:1px solid var(--border-t);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:4px;font-weight:500">✓ Works with most existing IP cameras</span>
+  <span style="background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid var(--border);font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:4px">Tapo · Hikvision · Reolink · and more</span>
+</div>
+    </div>
+    <div>
+      <div class="dash">
+        <div class="dash-hdr">
+          <div class="dash-title">SafeWatch+ — Home</div>
+          <div class="live-badge"><div class="ldot"></div>Live · 3 cameras</div>
+        </div>
+        <div class="cam-grid">
+          <div class="cam">
+            <div class="cam-lbl">CAM 1 · LIVING ROOM</div>
+            <div class="sk-m">
+              <div class="mh"></div>
+              <div class="lm ms"></div><div class="lm msl"></div><div class="lm msr"></div>
+              <div class="lm mal"></div><div class="lm mar"></div>
+              <div class="lm mhl"></div><div class="lm mhr"></div>
+              <div class="lm mll"></div><div class="lm mlr"></div>
+            </div>
+            <div class="cam-tag">Peter · SafeGuard</div>
+          </div>
+          <div class="cam">
+            <div class="cam-lbl">CAM 2 · STUDY ROOM</div>
+            <div class="sk-m" style="left:40%;opacity:0.6">
+              <div class="mh"></div>
+              <div class="lm ms"></div><div class="lm msl"></div><div class="lm msr"></div>
+              <div class="lm mhl"></div><div class="lm mhr"></div>
+            </div>
+            <div class="cam-tag unknown">Joseph · Presence</div>
+          </div>
+          <div class="cam">
+            <div class="cam-lbl">CAM 3 · STAIRCASE</div>
+            <div class="cam-empty"><div class="cam-empty-txt">No motion detected</div></div>
+          </div>
+          <div class="cam">
+            <div class="cam-lbl">CAM 4 · BEDROOM</div>
+            <div class="cam-empty"><div style="font-size:0.62rem;color:var(--teal);text-align:center;letter-spacing:0.05em">● MONITORING<br><span style="color:rgba(255,255,255,0.2)">No motion · 11:42pm</span></div></div>
+          </div>
+        </div>
+        <div class="status-bar">✅ All clear · Peter last seen Living Room 4 min ago · Gait normal</div>
+        <div class="people-chips">
+          <div class="chip"><div class="dot-on"></div>Peter · Living Room</div>
+          <div class="chip"><div class="dot-on"></div>Joseph · Study</div>
+          <div class="chip"><div class="dot-off"></div>Mary · Away</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="ti"><div class="tn">3+</div><div class="tl">cameras per deployment</div></div>
+  <div class="ti"><div class="tn">24/7</div><div class="tl">continuous monitoring</div></div>
+  <div class="ti"><div class="tn">0</div><div class="tl">wearables needed</div></div>
+  <div class="ti"><div class="tn">Auto</div><div class="tl">self-calibrating AI</div></div>
+  <div class="ti"><div class="tn">SG</div><div class="tl">data stays in Singapore</div></div>
+</div>
+
+<section class="section">
+  <div class="si">
+    <div class="slbl">What SafeWatch+ Monitors</div>
+    <h2 class="stitle">Complete room-wide AI surveillance.</h2>
+    <p class="ssub">Every person in every room — monitored, identified and protected around the clock.</p>
+    <div class="fg-grid">
+      <div class="fc"><div class="ficon">🫁</div><div class="ftitle">Fall Detection</div><p class="fdesc">Self-calibrating thresholds per person per camera. Works for any room height or angle — no manual setup.</p></div>
+      <div class="fc"><div class="ficon">🧠</div><div class="ftitle">Face Recognition</div><p class="fdesc">Enrol once in 60 seconds. AI captures 20 samples as the person walks naturally. No cooperation needed.</p></div>
+      <div class="fc"><div class="ficon">🚶</div><div class="ftitle">Gait Analysis</div><p class="fdesc">Daily gait score per SafeGuard member. Declining gait detected weeks before a fall — preventive alert.</p></div>
+      <div class="fc"><div class="ficon">⚡</div><div class="ftitle">Seizure Detection</div><p class="fdesc">AI monitors oscillation across multiple landmarks. Seizures detected and caregiver alerted within seconds.</p></div>
+      <div class="fc"><div class="ficon">📍</div><div class="ftitle">Room Presence Tracking</div><p class="fdesc">Know where each person is at all times. Ask "Where is Peter?" via Telegram and get an instant answer.</p></div>
+      <div class="fc"><div class="ficon">📊</div><div class="ftitle">Movement History</div><p class="fdesc">Daily and weekly activity summaries. Time in each room, sleep patterns, activity levels — all tracked automatically.</p></div>
+<div class="fc"><div class="ficon">🎯</div><div class="ftitle">AI Fall Probability Score</div><p class="fdesc">SafeWatch+ learns each person's baseline movement, posture and gait over time. A daily fall risk score (Low / Medium / High) is computed using machine learning — helping caregivers intervene before a fall happens, not after.</p>
+<div style="margin-top:1rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+<span style="background:rgba(46,204,113,0.1);color:#2ECC71;border:1px solid rgba(46,204,113,0.2);font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:4px">● Low Risk</span>
+<span style="background:rgba(241,196,15,0.1);color:#F1C40F;border:1px solid rgba(241,196,15,0.2);font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:4px">● Medium Risk</span>
+<span style="background:rgba(231,76,60,0.1);color:#E74C3C;border:1px solid rgba(231,76,60,0.2);font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:4px">● High Risk</span>
+</div>
+</div>
+      <div class="fc"><div class="ficon">🔄</div><div class="ftitle">Self-Calibrating AI</div><p class="fdesc">Thresholds set automatically per person per camera. AI learns each person's normal patterns within minutes.</p></div>
+      <div class="fc"><div class="ficon">👥</div><div class="ftitle">Multi-Person Tracking</div><p class="fdesc">Multiple people in one room? Each tracked independently. Different SafeGuard levels per person.</p></div>
+      <div class="fc"><div class="ficon">💬</div><div class="ftitle">Natural Language Queries</div><p class="fdesc">Ask SafeWatch+ anything via Telegram in plain English. Get instant answers — no app, no dashboard needed.</p>
+<div style="margin-top:1rem;background:rgba(0,0,0,0.2);border-radius:8px;padding:0.75rem;font-size:0.75rem;line-height:1.8;color:var(--muted);border:1px solid var(--border)">
+<span style="color:var(--teal)">You:</span> Where's Peter?<br>
+<span style="color:rgba(255,255,255,0.5)">→ Peter is in the Living Room · 23 mins</span><br>
+<span style="color:var(--teal)">You:</span> What time did Mary come home?<br>
+<span style="color:rgba(255,255,255,0.5)">→ Mary arrived at 6:42pm via Front Door</span><br>
+<span style="color:var(--teal)">You:</span> How was Peter today?<br>
+<span style="color:rgba(255,255,255,0.5)">→ Active 8.5hrs · Living Room 5h · No falls</span><br>
+<span style="color:var(--teal)">You:</span> Any falls today?<br>
+<span style="color:rgba(255,255,255,0.5)">→ ✅ No falls detected today. All clear.</span>
+</div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="si">
+    <div class="slbl">Who It's For</div>
+    <h2 class="stitle">Two markets. One platform.</h2>
+    <p class="ssub">Designed for both home and institutional care — same powerful AI, configured for your context.</p>
+    <div class="uc-grid">
+      <div class="uc">
+        <div class="uc-icon">🏠</div>
+        <h3 class="uc-title">Home Deployment</h3>
+        <p class="uc-desc">For families caring for elderly parents at home. 2–4 cameras covering key areas. Family members enrolled at different monitoring levels. Alerts go directly to children's phones.</p>
+        <ul class="uc-list">
+          <li>2–4 cameras: living room, bedroom, kitchen, corridor</li>
+          <li>SafeGuard for elderly parent — full monitoring</li>
+          <li>Presence tracking for other family members</li>
+          <li>Ask Telegram: "How was Dad today?"</li>
+          <li>Weekly activity summary to family</li>
+        </ul>
+      </div>
+      <div class="uc">
+        <div class="uc-icon">🏥</div>
+        <h3 class="uc-title">Nursing Home & Hospital</h3>
+        <p class="uc-desc">For facilities managing multiple patients. Multi-camera coverage of wards and corridors. Each patient monitored individually. Alerts routed to the right nurse or coordinator.</p>
+        <ul class="uc-list">
+          <li>Scalable — one ward to entire facility</li>
+          <li>Per-patient SafeGuard configuration</li>
+          <li>Alert routing to assigned nurse or coordinator</li>
+          <li>Auto-enrolment: AI clusters faces, staff names them</li>
+          <li>On-site setup and training included</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="si">
+    <div class="slbl">Deployment</div>
+    <h2 class="stitle">Up and running in a day.</h2>
+    <p class="ssub">No complex infrastructure. Works with standard IP cameras you may already own.</p>
+    <div class="how-grid">
+      <div class="hw"><div class="hw-num">01</div><div class="hw-title">Camera installation</div><p class="hw-desc">SafeWatch+ works with most standard IP cameras — including ones you may already own. Tapo, Hikvision, Reolink and others are supported. Camera performance may vary based on resolution, frame rate and placement. Our team advises on compatibility and optimal positioning before deployment.</p></div>
+      <div class="hw"><div class="hw-num">02</div><div class="hw-title">Person enrolment</div><p class="hw-desc">Each person walks naturally in front of the camera for 60 seconds. AI captures 20 samples automatically. Name them, set their monitoring level. Done.</p></div>
+      <div class="hw"><div class="hw-num">03</div><div class="hw-title">AI calibration</div><p class="hw-desc">SafeWatch+ learns each person's posture, movement amplitude and gait within minutes of first use. Thresholds set automatically — no manual config needed.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="si">
+    <div class="slbl">Technology</div>
+    <h2 class="stitle">Built on proven AI.</h2>
+    <p class="ssub">Runs on NVIDIA Jetson hardware with GPU-accelerated inference — fast, reliable and fully on-premise.</p>
+    <div class="tech-grid">
+      <div class="tch"><div class="tch-icon">🖥️</div><div class="tch-title">NVIDIA Jetson</div><p class="tch-desc">Edge AI hardware. All processing happens on-site — no cloud dependency, no latency.</p></div>
+      <div class="tch"><div class="tch-icon">⚡</div><div class="tch-title">TensorRT GPU</div><p class="tch-desc">Person detection at 7ms per frame — real-time across all cameras simultaneously.</p></div>
+      <div class="tch"><div class="tch-icon">🧍</div><div class="tch-title">MediaPipe Pose</div><p class="tch-desc">33-point skeleton tracking per person. Fall, gait and seizure analysis in real time.</p></div>
+      <div class="tch"><div class="tch-icon">👤</div><div class="tch-title">InsightFace</div><p class="tch-desc">State-of-the-art face recognition. Identifies each person from any angle and distance.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" style="background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)" id="pricing">
+  <div class="si">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <div class="slbl" style="text-align:center">Pricing</div>
+      <h2 class="stitle" style="text-align:center">Simple, transparent pricing.</h2>
+      <p style="font-size:0.95rem;color:var(--muted);text-align:center;max-width:520px;margin:0 auto">No hidden fees. Includes hardware setup, onboarding and ongoing support.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5px;background:var(--border);border-radius:16px;overflow:hidden;max-width:900px;margin:0 auto">
+
+      <div style="background:var(--navy2);padding:2.25rem;position:relative">
+        <div style="font-weight:600;font-size:0.88rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.6rem">Home</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:2.4rem;color:var(--white);margin-bottom:0.25rem">$80</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem">/ month</div>
+        <ul style="list-style:none;margin-bottom:1.75rem">
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Up to 4 cameras</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>1 SafeGuard member</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Fall, gait & seizure detection</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Telegram alerts</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Movement history & reports</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem;opacity:0.4"><span style="color:var(--muted);font-weight:700;flex-shrink:0">–</span>Multi-SafeGuard members</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem;opacity:0.4"><span style="color:var(--muted);font-weight:700;flex-shrink:0">–</span>Facility dashboard</li>
+        </ul>
+        <a href="mailto:hello@shepherdlab.life?subject=SafeWatch+ Home" class="btn btn-outline" style="width:100%;text-align:center;display:block;border-color:rgba(0,168,150,0.3);color:var(--teal)">Get started</a>
+      </div>
+
+      <div style="background:var(--navy3);padding:2.25rem;position:relative">
+        <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--teal);color:var(--navy);font-size:0.68rem;font-weight:700;padding:0.25rem 1rem;border-radius:0 0 6px 6px;white-space:nowrap">Most popular</div>
+        <div style="font-weight:600;font-size:0.88rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.6rem">Home Pro</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:2.4rem;color:var(--white);margin-bottom:0.25rem">$120</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem">/ month</div>
+        <ul style="list-style:none;margin-bottom:1.75rem">
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Up to 6 cameras</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Up to 3 SafeGuard members</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Fall, gait & seizure detection</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Telegram alerts + daily summaries</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Multi-caregiver access</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Weekly PDF health reports</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem;opacity:0.4"><span style="color:var(--muted);font-weight:700;flex-shrink:0">–</span>Facility dashboard</li>
+        </ul>
+        <a href="mailto:hello@shepherdlab.life?subject=SafeWatch+ Home Pro" class="btn btn-teal" style="width:100%;text-align:center;display:block">Get started</a>
+      </div>
+
+      <div style="background:var(--navy);padding:2.25rem;border:1px solid rgba(0,168,150,0.15)">
+        <div style="font-weight:600;font-size:0.88rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.6rem">Facility</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--white);margin-bottom:0.25rem;margin-top:0.3rem">Contact us</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem">nursing homes & hospitals</div>
+        <ul style="list-style:none;margin-bottom:1.75rem">
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Unlimited cameras</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Per-patient SafeGuard config</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Staff alert routing</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Facility dashboard</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>On-site setup & training</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>SLA + dedicated support</li>
+          <li style="font-size:0.86rem;color:var(--muted);padding:0.32rem 0;display:flex;align-items:flex-start;gap:0.5rem"><span style="color:var(--teal);font-weight:700;flex-shrink:0">✓</span>Custom pricing by ward/bed count</li>
+        </ul>
+        <a href="mailto:hello@shepherdlab.life?subject=SafeWatch+ Facility Enquiry" class="btn btn-outline" style="width:100%;text-align:center;display:block;border-color:rgba(0,168,150,0.3);color:var(--teal)">Request a quote</a>
+      </div>
+
+    </div>
+    <p style="text-align:center;margin-top:1.5rem;font-size:0.8rem;color:var(--muted)">Hardware (NVIDIA Jetson + IP cameras) quoted separately · All plans include remote monitoring setup</p>
+  </div>
+</section>
+
+<section class="section" id="demo">
+  <div class="si">
+    <div class="cta-box">
+      <h2>See SafeWatch+<br>in action.</h2>
+      <p>A live demo tailored to your home or facility. No commitment, no pressure — just an honest look at what SafeWatch+ can do.</p>
+      <div class="demo-chips">
+        <span class="demo-chip">Multi-person tracking demo</span>
+        <span class="demo-chip">Fall detection simulation</span>
+        <span class="demo-chip">Telegram walkthrough</span>
+        <span class="demo-chip">Facility pricing discussion</span>
+      </div>
+      <div class="cta-btns">
+        <a href="mailto:hello@shepherdlab.life?subject=SafeWatch+ Demo Request" class="btn btn-teal btn-lg">Request a demo</a>
+        <a href="mailto:hello@shepherdlab.life" class="btn btn-ghost btn-lg">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="ft">
+      <div>
+        <a href="index.html" class="flogo">Shepherd<span>Lab</span></a>
+        <p class="finfo">ShepherdLab is a division of NHB Industrial Pte Ltd<br>UEN 202542682D<br>5038 Ang Mo Kio Industrial Park 2, #01-409<br>Singapore 569541</p>
+      </div>
+      <div class="fcol"><h4>Products</h4><ul><li><a href="fallguard.html">FallGuard+</a></li><li><a href="safewatch.html">SafeWatch+</a></li></ul></div>
+      <div class="fcol"><h4>Company</h4><ul><li><a href="index.html#about">About</a></li><li><a href="mailto:hello@shepherdlab.life">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+      <div class="fcol"><h4>Contact</h4><ul><li><a href="mailto:hello@shepherdlab.life">hello@shepherdlab.life</a></li><li><a href="https://shepherdlab.life">shepherdlab.life</a></li></ul></div>
+    </div>
+    <div class="fb">
+      <span>© 2026 NHB Industrial Pte Ltd (UEN 202542682D). All rights reserved.</span>
+      <span>🇸🇬 Data stays in Singapore · PDPA compliant</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
