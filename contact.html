@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us · ShepherdLab</title>
+<meta name="description" content="Get in touch with ShepherdLab. Sales enquiries, technical support, demo requests and general questions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D1B2A;--navy2:#122030;--navy3:#1A2E42;
+  --teal:#00A896;--teal-dk:#007A6E;--teal-lt:rgba(0,168,150,0.12);
+  --white:#FFFFFF;--muted:#8BA0B4;--border:rgba(255,255,255,0.08);--border-t:rgba(0,168,150,0.3);--r:12px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;font-size:16px;color:var(--white);background:var(--navy);line-height:1.65;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:'DM Serif Display',serif;font-size:1.35rem;color:var(--white);text-decoration:none;letter-spacing:-0.02em}
+.logo span{color:var(--teal)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:0.88rem;font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.btn{display:inline-block;padding:0.65rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:500;text-decoration:none;transition:all 0.2s;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-teal{background:var(--teal);color:var(--navy);font-weight:600;border:none}
+.btn-teal:hover{background:#00BFA8}
+
+/* HERO */
+.hero{padding:5rem 2.5rem 4rem;text-align:center;max-width:620px;margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:var(--teal-lt);color:var(--teal);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:4px;margin-bottom:1.5rem;border:1px solid var(--border-t)}
+h1{font-family:'DM Serif Display',serif;font-size:2.8rem;line-height:1.12;letter-spacing:-0.03em;color:var(--white);margin-bottom:1rem}
+.hero p{font-size:1rem;color:var(--muted);line-height:1.75}
+
+/* MAIN */
+.main{padding:0 2.5rem 6rem}
+.main-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1.6fr;gap:3rem;align-items:start}
+
+/* LEFT SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:1rem}
+.contact-type{background:var(--navy2);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:flex-start;gap:0.9rem}
+.contact-type:hover,.contact-type.active{border-color:var(--teal);background:var(--navy3)}
+.contact-type.active{border-color:var(--teal)}
+.ct-icon{font-size:1.3rem;flex-shrink:0;margin-top:0.1rem}
+.ct-title{font-weight:600;font-size:0.9rem;color:var(--white);margin-bottom:0.2rem}
+.ct-desc{font-size:0.78rem;color:var(--muted);line-height:1.5}
+
+/* FORM */
+.form-wrap{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:2.5rem}
+.form-title{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--white);margin-bottom:0.4rem}
+.form-sub{font-size:0.88rem;color:var(--muted);margin-bottom:2rem}
+
+.form-group{margin-bottom:1.25rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+label{display:block;font-size:0.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.5rem}
+input,select,textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:0.75rem 1rem;font-size:0.9rem;color:var(--white);font-family:'DM Sans',sans-serif;transition:border-color 0.2s;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--teal)}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.2)}
+select option{background:var(--navy2);color:var(--white)}
+textarea{resize:vertical;min-height:120px}
+
+/* Dynamic form sections */
+.form-section{display:none}
+.form-section.active{display:block}
+
+.checkbox-group{display:flex;flex-direction:column;gap:0.6rem}
+.checkbox-item{display:flex;align-items:center;gap:0.75rem;cursor:pointer;font-size:0.88rem;color:var(--muted)}
+.checkbox-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--teal);flex-shrink:0;cursor:pointer}
+.checkbox-item:hover{color:var(--white)}
+
+.submit-btn{width:100%;padding:0.9rem;background:var(--teal);color:var(--navy);border:none;border-radius:6px;font-size:0.95rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;margin-top:0.5rem}
+.submit-btn:hover{background:#00BFA8;transform:translateY(-1px)}
+
+.success-msg{display:none;background:rgba(0,168,150,0.08);border:1px solid rgba(0,168,150,0.3);border-radius:var(--r);padding:2rem;text-align:center}
+.success-msg.show{display:block}
+.success-icon{font-size:2.5rem;margin-bottom:1rem}
+.success-title{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:0.5rem}
+.success-sub{font-size:0.88rem;color:var(--muted)}
+
+/* FOOTER */
+footer{background:var(--navy2);border-top:1px solid var(--border);padding:3rem 2.5rem 2rem}
+.fi{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.flogo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--white);text-decoration:none}
+.flogo span{color:var(--teal)}
+.fb{font-size:0.76rem;color:rgba(255,255,255,0.25)}
+
+@media(max-width:800px){
+  .main-inner{grid-template-columns:1fr}
+  h1{font-size:2.2rem}
+  .nav-links{display:none}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Shepherd<span>Lab</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="fallguard.html">FallGuard+</a></li>
+    <li><a href="safewatch.html">SafeWatch+</a></li>
+    <li><a href="contact.html" style="color:var(--teal)">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="btn btn-teal">Get in touch</a>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">📬 Contact ShepherdLab</div>
+  <h1>How can we<br>help you?</h1>
+  <p>Tell us what you need and we'll get back to you within one business day.</p>
+</section>
+
+<div class="main">
+  <div class="main-inner">
+
+    <!-- LEFT: Contact type selector -->
+    <div class="sidebar">
+      <div class="contact-type active" onclick="setType('demo')">
+        <div class="ct-icon">🎥</div>
+        <div>
+          <div class="ct-title">Request a Demo</div>
+          <div class="ct-desc">See SafeWatch+ or FallGuard+ live. Tailored to your home or facility.</div>
+        </div>
+      </div>
+      <div class="contact-type" onclick="setType('sales')">
+        <div class="ct-icon">💼</div>
+        <div>
+          <div class="ct-title">Sales Enquiry</div>
+          <div class="ct-desc">Pricing, plans, hardware packages and deployment options.</div>
+        </div>
+      </div>
+      <div class="contact-type" onclick="setType('support')">
+        <div class="ct-icon">🛠️</div>
+        <div>
+          <div class="ct-title">Technical Support</div>
+          <div class="ct-desc">Help with your existing SafeWatch+ or FallGuard+ setup.</div>
+        </div>
+      </div>
+      <div class="contact-type" onclick="setType('facility')">
+        <div class="ct-icon">🏥</div>
+        <div>
+          <div class="ct-title">Facility / Enterprise</div>
+          <div class="ct-desc">Nursing homes, hospitals and large-scale deployments.</div>
+        </div>
+      </div>
+      <div class="contact-type" onclick="setType('general')">
+        <div class="ct-icon">💬</div>
+        <div>
+          <div class="ct-title">General Enquiry</div>
+          <div class="ct-desc">Anything else — partnerships, press, or just a question.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="form-wrap">
+      <div id="form-container">
+        <div id="form-title" class="form-title">Request a Demo</div>
+        <div id="form-sub" class="form-sub">We'll set up a live walkthrough tailored to your situation. No commitment required.</div>
+
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <!-- Common fields -->
+          <div class="form-row">
+            <div>
+              <label>First name</label>
+              <input type="text" placeholder="John" required>
+            </div>
+            <div>
+              <label>Last name</label>
+              <input type="text" placeholder="Smith" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email address</label>
+            <input type="email" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone (optional)</label>
+            <input type="tel" placeholder="+65 9123 4567">
+          </div>
+          <div class="form-group">
+            <label>Country</label>
+            <select>
+              <option value="">Select your country...</option>
+              <option>Singapore</option>
+              <option>Malaysia</option>
+              <option>Australia</option>
+              <option>United Kingdom</option>
+              <option>United States</option>
+              <option>Hong Kong</option>
+              <option>Indonesia</option>
+              <option>Thailand</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <!-- DEMO section -->
+          <div id="sec-demo" class="form-section active">
+            <div class="form-group">
+              <label>Which product are you interested in?</label>
+              <select>
+                <option>SafeWatch+ (room-wide AI monitoring)</option>
+                <option>FallGuard+ (wheelchair fall detection)</option>
+                <option>Both products</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Deployment context</label>
+              <select>
+                <option>Home — caring for an elderly parent</option>
+                <option>Home — multiple family members</option>
+                <option>Nursing home / care facility</option>
+                <option>Hospital / medical facility</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Number of cameras / rooms (estimate)</label>
+              <select>
+                <option>1–2 cameras</option>
+                <option>3–4 cameras</option>
+                <option>5–8 cameras</option>
+                <option>8+ cameras (facility scale)</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Anything specific you'd like to see in the demo?</label>
+              <textarea placeholder="E.g. fall detection, bathroom privacy mode, Telegram alerts, gait analysis..."></textarea>
+            </div>
+          </div>
+
+          <!-- SALES section -->
+          <div id="sec-sales" class="form-section">
+            <div class="form-group">
+              <label>Product interest</label>
+              <select>
+                <option>SafeWatch+ — Home plan</option>
+                <option>SafeWatch+ — Home Pro plan</option>
+                <option>SafeWatch+ — Facility plan</option>
+                <option>FallGuard+ — Basic plan</option>
+                <option>FallGuard+ — Pro plan</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Do you have existing IP cameras?</label>
+              <select>
+                <option>Yes — Tapo</option>
+                <option>Yes — Hikvision</option>
+                <option>Yes — Reolink</option>
+                <option>Yes — other brand</option>
+                <option>No — need to purchase cameras</option>
+                <option>Not sure</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Timeline</label>
+              <select>
+                <option>As soon as possible</option>
+                <option>Within 1 month</option>
+                <option>1–3 months</option>
+                <option>Just researching for now</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Questions or comments</label>
+              <textarea placeholder="Any specific questions about pricing, hardware or deployment..."></textarea>
+            </div>
+          </div>
+
+          <!-- SUPPORT section -->
+          <div id="sec-support" class="form-section">
+            <div class="form-group">
+              <label>Product</label>
+              <select>
+                <option>SafeWatch+</option>
+                <option>FallGuard+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Issue type</label>
+              <select>
+                <option>Camera not connecting</option>
+                <option>Fall detection not triggering</option>
+                <option>Telegram alerts not working</option>
+                <option>Face recognition issues</option>
+                <option>App / software error</option>
+                <option>Hardware issue</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Describe the issue</label>
+              <textarea placeholder="What's happening? When did it start? What have you already tried?" style="min-height:140px"></textarea>
+            </div>
+          </div>
+
+          <!-- FACILITY section -->
+          <div id="sec-facility" class="form-section">
+            <div class="form-group">
+              <label>Organisation name</label>
+              <input type="text" placeholder="e.g. Sunshine Care Home">
+            </div>
+            <div class="form-group">
+              <label>Facility type</label>
+              <select>
+                <option>Nursing home / care facility</option>
+                <option>Hospital</option>
+                <option>Rehabilitation centre</option>
+                <option>Day care centre</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Number of patients / residents to monitor</label>
+              <select>
+                <option>Under 10</option>
+                <option>10–30</option>
+                <option>30–100</option>
+                <option>100+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Features most important to you</label>
+              <div class="checkbox-group">
+                <label class="checkbox-item"><input type="checkbox"> Fall detection & alerts</label>
+                <label class="checkbox-item"><input type="checkbox"> Gait analysis & fall risk scoring</label>
+                <label class="checkbox-item"><input type="checkbox"> Seizure detection</label>
+                <label class="checkbox-item"><input type="checkbox"> Room presence tracking</label>
+                <label class="checkbox-item"><input type="checkbox"> Staff alert routing</label>
+                <label class="checkbox-item"><input type="checkbox"> Bathroom privacy mode</label>
+                <label class="checkbox-item"><input type="checkbox"> Weekly health reports</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Additional notes</label>
+              <textarea placeholder="Any specific requirements, budget range, or questions..."></textarea>
+            </div>
+          </div>
+
+          <!-- GENERAL section -->
+          <div id="sec-general" class="form-section">
+            <div class="form-group">
+              <label>Subject</label>
+              <select>
+                <option>Partnership opportunity</option>
+                <option>Press / media enquiry</option>
+                <option>Investor enquiry</option>
+                <option>General question</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea placeholder="How can we help?" style="min-height:160px"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submit-btn">Send message →</button>
+        </form>
+
+        <div class="success-msg" id="success-msg">
+          <div class="success-icon">✅</div>
+          <div class="success-title">Message received!</div>
+          <p class="success-sub">Thank you for reaching out. We'll get back to you within one business day.<br><br>For urgent support, email us directly at <a href="mailto:hello@shepherdlab.life" style="color:var(--teal)">hello@shepherdlab.life</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="fi">
+    <a href="index.html" class="flogo">Shepherd<span>Lab</span></a>
+    <div class="fb">© 2026 NHB Industrial Pte Ltd (UEN 202542682D). All rights reserved. · Data on-premise · PDPA compliant</div>
+  </div>
+</footer>
+
+<script>
+const types = ['demo','sales','support','facility','general'];
+const titles = {
+  demo: ['Request a Demo', "We'll set up a live walkthrough tailored to your situation. No commitment required."],
+  sales: ['Sales Enquiry', "Tell us about your needs and we'll put together the right package for you."],
+  support: ['Technical Support', "Describe your issue and our team will get back to you as quickly as possible."],
+  facility: ['Facility / Enterprise Enquiry', "Tell us about your facility and we'll design a deployment that fits your needs."],
+  general: ['General Enquiry', "Got a question or idea? We'd love to hear from you."]
+};
+
+function setType(type) {
+  // Update sidebar
+  document.querySelectorAll('.contact-type').forEach((el,i) => {
+    el.classList.toggle('active', types[i] === type);
+  });
+  // Update form sections
+  types.forEach(t => {
+    const sec = document.getElementById('sec-' + t);
+    if(sec) sec.classList.toggle('active', t === type);
+  });
+  // Update title
+  document.getElementById('form-title').textContent = titles[type][0];
+  document.getElementById('form-sub').textContent = titles[type][1];
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  // In production: POST to your backend / Formspree / EmailJS
+  // For now, show success message
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('success-msg').classList.add('show');
+  // Also send via mailto as fallback
+  setTimeout(() => {
+    window.location.href = 'mailto:hello@shepherdlab.life?subject=ShepherdLab Enquiry';
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
