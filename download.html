@@ -3,460 +3,174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Activate FallGuard+ — ShepherdLab</title>
-<meta name="description" content="Activate your FallGuard+ subscription purchased on Shopee. Enter your order number to receive your download link and login credentials.">
-<meta name="robots" content="noindex">
+<title>Activate FallGuard+ · ShepherdLab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#0D1B2A;
-  --navy2:#122030;
-  --navy3:#1A2E42;
-  --teal:#00A896;
-  --teal-dk:#007A6E;
-  --teal-lt:rgba(0,168,150,0.12);
-  --teal-glow:rgba(0,168,150,0.25);
-  --white:#FFFFFF;
-  --off:#E8EDF2;
-  --muted:#8BA0B4;
-  --border:rgba(255,255,255,0.08);
-  --border-t:rgba(0,168,150,0.3);
-  --r:12px;
+  --navy:#0D1B2A;--navy2:#122030;--navy3:#1A2E42;
+  --teal:#00A896;--teal-lt:rgba(0,168,150,0.12);--teal-bd:rgba(0,168,150,0.3);
+  --white:#fff;--muted:#8BA0B4;--border:rgba(255,255,255,0.08);--r:10px;
+  --red:#f87171;--green:#2ECC71;
 }
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;font-size:16px;color:var(--white);background:var(--navy);line-height:1.65;-webkit-font-smoothing:antialiased;min-height:100vh}
-
-nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:66px}
-.logo{font-family:'DM Serif Display',serif;font-size:1.35rem;color:var(--white);text-decoration:none;letter-spacing:-0.02em}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--white);text-decoration:none}
 .logo span{color:var(--teal)}
-.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
-.nav-links a{text-decoration:none;color:var(--muted);font-size:0.88rem;font-weight:500;transition:color 0.2s}
-.nav-links a:hover{color:var(--white)}
-.btn{display:inline-block;padding:0.65rem 1.5rem;border-radius:6px;font-size:0.88rem;font-weight:500;text-decoration:none;transition:all 0.2s;cursor:pointer;font-family:'DM Sans',sans-serif;border:none}
-.btn-teal{background:var(--teal);color:var(--navy);font-weight:600}
-.btn-teal:hover{background:#00BFA8}
-
-/* HERO */
-.hero{padding:5rem 2.5rem 3rem;text-align:center;max-width:700px;margin:0 auto;position:relative}
-.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:500px;height:400px;background:radial-gradient(ellipse,rgba(0,168,150,0.07) 0%,transparent 70%);pointer-events:none}
-.eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:var(--teal-lt);color:var(--teal);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:4px;margin-bottom:1.5rem;border:1px solid var(--border-t)}
-.hero h1{font-family:'DM Serif Display',serif;font-size:2.6rem;line-height:1.12;letter-spacing:-0.03em;color:var(--white);margin-bottom:1rem}
-.hero h1 em{font-style:italic;color:var(--teal)}
-.hero p{font-size:1rem;color:var(--muted);margin:0 auto;line-height:1.75}
-
-/* MAIN LAYOUT */
-.main{max-width:900px;margin:0 auto;padding:0 2.5rem 6rem;display:grid;grid-template-columns:1fr 1.6fr;gap:2.5rem;align-items:start}
-
-/* SIDEBAR */
-.sidebar-steps{display:flex;flex-direction:column;gap:0}
-.step-item{display:flex;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--border)}
-.step-item:last-child{border-bottom:none}
-.step-num{width:28px;height:28px;background:var(--teal-lt);border:1px solid var(--border-t);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--teal);flex-shrink:0;margin-top:2px}
-.step-num.done{background:var(--teal);color:var(--navy)}
-.step-title{font-size:0.88rem;font-weight:600;color:var(--white);margin-bottom:0.2rem}
-.step-desc{font-size:0.8rem;color:var(--muted);line-height:1.5}
-
-/* FORM CARD */
-.form-card{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:2.2rem}
-.form-title{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.4rem}
-.form-sub{font-size:0.88rem;color:var(--muted);margin-bottom:2rem;line-height:1.6}
-
-.form-group{margin-bottom:1.25rem}
-label{display:block;font-size:0.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.5rem}
-input,select{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:0.75rem 1rem;font-size:0.9rem;color:var(--white);font-family:'DM Sans',sans-serif;transition:border-color 0.2s;outline:none;-webkit-appearance:none}
-input:focus,select:focus{border-color:var(--teal)}
-input::placeholder{color:rgba(139,160,180,0.5)}
-select option{background:var(--navy2);color:var(--white)}
-
-/* Plan cards */
-.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.25rem}
-.plan-opt{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:1rem;cursor:pointer;transition:all 0.2s;position:relative}
-.plan-opt:hover{border-color:rgba(0,168,150,0.4);background:rgba(0,168,150,0.05)}
-.plan-opt.selected{border-color:var(--teal);background:var(--teal-lt)}
-.plan-opt input[type=radio]{position:absolute;opacity:0;width:0;height:0}
-.plan-name{font-size:0.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem}
-.plan-price{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--white)}
-.plan-period{font-size:0.72rem;color:var(--muted)}
-.plan-badge{display:inline-block;background:var(--teal);color:var(--navy);font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:middle}
-
-.submit-btn{width:100%;padding:0.9rem;background:var(--teal);color:var(--navy);border:none;border-radius:6px;font-size:0.95rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;margin-top:0.5rem}
-.submit-btn:hover:not(:disabled){background:#00BFA8;transform:translateY(-1px)}
-.submit-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
-
-.error-box{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:6px;padding:0.75rem 1rem;margin-bottom:1rem;font-size:0.85rem;color:#f87171;display:none}
-.success-box{display:none;text-align:center;padding:1rem 0}
-.success-icon{font-size:2.5rem;margin-bottom:1rem}
-.success-title{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:0.5rem}
-.success-sub{font-size:0.88rem;color:var(--muted);line-height:1.7}
-.success-sub strong{color:var(--teal)}
-
-.helper-text{font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.5}
-
-/* Trust badges */
-.trust-row{display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap}
-.trust-item{display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--muted)}
-.trust-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;flex-shrink:0}
-
-/* FAQ */
-.faq-section{max-width:900px;margin:0 auto;padding:0 2.5rem 5rem}
-.faq-title{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--white);margin-bottom:2rem}
-.faq-item{border-bottom:1px solid var(--border);padding:1rem 0}
-.faq-q{font-size:0.92rem;font-weight:600;color:var(--white);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem}
-.faq-q::after{content:'+';font-size:1.2rem;color:var(--teal);flex-shrink:0;transition:transform 0.2s}
-.faq-item.open .faq-q::after{transform:rotate(45deg)}
-.faq-a{font-size:0.86rem;color:var(--muted);line-height:1.7;padding-top:0.75rem;display:none}
-.faq-item.open .faq-a{display:block}
-
-/* Footer */
-footer{background:var(--navy2);border-top:1px solid var(--border);padding:2rem 2.5rem}
-.footer-inner{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.flogo{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--white);text-decoration:none}
-.flogo span{color:var(--teal)}
-.fb{font-size:0.75rem;color:rgba(139,160,180,0.6)}
-
-@media(max-width:700px){
-  .main{grid-template-columns:1fr;padding:0 1.25rem 4rem}
-  .hero{padding:3rem 1.25rem 2rem}
-  .hero h1{font-size:2rem}
-  .nav-links{display:none}
-  .footer-inner{flex-direction:column;align-items:flex-start}
-  nav{padding:0 1.25rem}
-  .faq-section{padding:0 1.25rem 3rem}
-}
+.page{max-width:560px;margin:0 auto;padding:3rem 1.5rem 5rem}
+.eyebrow{display:inline-block;background:var(--teal-lt);color:var(--teal);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:4px;margin-bottom:1.25rem;border:1px solid var(--teal-bd)}
+h1{font-family:'DM Serif Display',serif;font-size:2.4rem;line-height:1.1;letter-spacing:-0.03em;margin-bottom:0.75rem}
+h1 em{font-style:italic;color:var(--teal)}
+.sub{color:var(--muted);font-size:0.95rem;margin-bottom:2rem;line-height:1.7}
+.card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:2rem;margin-bottom:1rem}
+.included{background:var(--teal-lt);border:1px solid var(--teal-bd);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:1.5rem}
+.included-title{font-size:0.75rem;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem}
+.included-body{font-size:0.85rem;color:var(--muted);line-height:1.65}
+.included-body strong{color:var(--white)}
+label{display:block;font-size:0.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.45rem}
+input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:0.8rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.2s;margin-bottom:1.25rem}
+input:focus{border-color:var(--teal)}
+input::placeholder{color:var(--muted)}
+.hint{font-size:0.75rem;color:var(--muted);margin-top:-0.9rem;margin-bottom:1.25rem;line-height:1.5}
+.btn{width:100%;padding:0.9rem;background:var(--teal);color:var(--navy);border:none;border-radius:8px;font-size:1rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s}
+.btn:hover{background:#00BFA8}
+.btn:disabled{opacity:0.6;cursor:not-allowed}
+.error{background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.3);border-radius:8px;padding:0.85rem 1rem;font-size:0.85rem;color:var(--red);margin-bottom:1rem;display:none}
+.success{display:none;text-align:center;padding:1rem 0}
+.success-icon{font-size:3.5rem;margin-bottom:1rem}
+.success-title{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:0.5rem}
+.success-sub{font-size:0.9rem;color:var(--muted);line-height:1.7;max-width:420px;margin:0 auto}
+.success-sub strong{color:var(--white)}
+.help{text-align:center;font-size:0.8rem;color:var(--muted);margin-top:1.25rem}
+.help a{color:var(--teal);text-decoration:none}
+footer{background:var(--navy2);border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;font-size:0.75rem;color:var(--muted)}
+footer a{color:var(--teal);text-decoration:none}
 </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="logo">Shepherd<span>Lab</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="fallguard.html">FallGuard+</a></li>
-    <li><a href="safewatch.html">SafeWatch+</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <a href="contact.html" class="btn btn-teal">Get in touch</a>
 </nav>
 
-<section class="hero">
-  <div class="eyebrow">🎁 Shopee Bundle · 6 Months Free Included</div>
+<div class="page">
+  <div class="eyebrow">🎁 Shopee Bundle · 6 Months Free</div>
   <h1>Activate your free<br><em>6-month access.</em></h1>
-  <p>Your wheelchair purchase includes 6 months of FallGuard+ Basic — free. Enter your Shopee order number below to activate and get your download link instantly.</p>
-</section>
+  <p class="sub">Your wheelchair purchase includes 6 months of FallGuard+ Basic — free. Enter your Shopee order number below to get your download link and login credentials by email.</p>
 
-<div class="main">
+  <!-- Form -->
+  <div class="card" id="form-card">
 
-  <!-- Left: How it works steps -->
-  <div>
-    <div style="font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--teal);margin-bottom:1.25rem">How it works</div>
-    <div class="sidebar-steps">
-      <div class="step-item">
-        <div class="step-num done">1</div>
-        <div>
-          <div class="step-title">Purchase on Shopee</div>
-          <div class="step-desc">Your wheelchair bundle from Shopee includes 6 months of FallGuard+ Basic for free.</div>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div>
-          <div class="step-title">Enter order number here</div>
-          <div class="step-desc">We verify your Shopee order and create your FallGuard+ account. 6 months free access starts immediately.</div>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div>
-          <div class="step-title">Check your email</div>
-          <div class="step-desc">Your username, password and APK download link are sent to your inbox within seconds.</div>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">4</div>
-        <div>
-          <div class="step-title">Install &amp; start</div>
-          <div class="step-desc">Download, install, log in. Set up Telegram alerts in 2 minutes. Start monitoring.</div>
-        </div>
+    <div class="included">
+      <div class="included-title">🎁 What you get</div>
+      <div class="included-body">
+        <strong>FallGuard+ Basic — 6 months free</strong><br>
+        Fall detection · Absence alert · Agitation alert · Inactivity alert · Telegram alerts<br>
+        <span style="font-size:0.75rem;margin-top:0.3rem;display:block">After 6 months: continue at SGD $15/month</span>
       </div>
     </div>
 
-    <!-- Where to find order number -->
-    <div style="margin-top:2rem;background:var(--navy2);border:1px solid var(--border);border-radius:10px;padding:1.25rem">
-      <div style="font-size:0.78rem;font-weight:600;color:var(--white);margin-bottom:0.6rem">📱 Where to find your Shopee order number</div>
-      <div style="font-size:0.8rem;color:var(--muted);line-height:1.65">
-        1. Open the <strong style="color:var(--white)">Shopee app</strong><br>
-        2. Tap <strong style="color:var(--white)">Me</strong> → <strong style="color:var(--white)">My Purchases</strong><br>
-        3. Find your wheelchair order<br>
-        4. Tap the order → copy the <strong style="color:var(--teal)">Order ID</strong> at the top
-      </div>
-    </div>
+    <div class="error" id="error-box"></div>
 
-    <!-- Contact fallback -->
-    <div style="margin-top:1.25rem;font-size:0.8rem;color:var(--muted);line-height:1.7">
-      Having trouble? Email us at<br>
-      <a href="mailto:hello@shepherdlab.life" style="color:var(--teal);text-decoration:none">hello@shepherdlab.life</a>
-      or WhatsApp <a href="https://wa.me/6588357181" style="color:var(--teal);text-decoration:none">+65 8835 7181</a>
+    <label for="inp-order">Shopee Order Number</label>
+    <input type="text" id="inp-order" placeholder="e.g. 250619ABCD1234" autocomplete="off" autocapitalize="characters">
+    <div class="hint">Found in Shopee app → Me → My Purchases → your wheelchair order → Order ID</div>
+
+    <label for="inp-email">Your Email Address</label>
+    <input type="email" id="inp-email" placeholder="you@email.com">
+    <div class="hint">Your login credentials and APK download link will be sent here</div>
+
+    <button class="btn" id="submit-btn" onclick="doActivate()">
+      Activate 6 Months Free →
+    </button>
+
+    <div class="help">
+      Need help?
+      <a href="https://wa.me/6588357181" target="_blank">WhatsApp +65 8835 7181</a>
+      or <a href="mailto:hello@shepherdlab.life">hello@shepherdlab.life</a>
     </div>
   </div>
 
-  <!-- Right: Activation form -->
-  <div class="form-card">
-    <div class="form-title">Activate 6 months free</div>
-    <div class="form-sub">Included with your Shopee wheelchair purchase.</div>
-
-    <!-- Error box -->
-    <div class="error-box" id="error-box"></div>
-
-    <!-- Form -->
-    <form id="activate-form" onsubmit="return false;">
-
-      <div class="form-group">
-        <label for="order">Shopee Order Number</label>
-        <input
-          type="text"
-          id="order"
-          name="order"
-          placeholder="e.g. 250430ABCD1234"
-          autocomplete="off"
-          autocapitalize="characters"
-          required
-        >
-        <div class="helper-text">Found in Shopee app → Me → My Purchases → your order</div>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Your Email Address</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="you@email.com"
-          autocomplete="email"
-          required
-        >
-        <div class="helper-text">Your login credentials and APK download link will be sent here</div>
-      </div>
-
-      <!-- What they get -->
-      <div style="background:rgba(0,168,150,0.08);border:1px solid rgba(0,168,150,0.25);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.25rem">
-        <div style="font-size:0.8rem;font-weight:600;color:var(--teal);margin-bottom:0.5rem">🎁 What's included with your purchase</div>
-        <div style="font-size:0.8rem;color:var(--muted);line-height:1.7">
-          <span style="color:#E8EDF2">FallGuard+ Basic — 6 months free</span><br>
-          Fall detection · Absence alert · Agitation alert · Inactivity alert<br>
-          Telegram alerts · Event history log<br>
-          <span style="font-size:0.72rem;margin-top:0.4rem;display:block">After 6 months: continue at SGD $15/month or upgrade to Pro at $20/month</span>
-        </div>
-      </div>
-
-      <button type="button" class="submit-btn" id="submit-btn" onclick="handleActivate(event)">
-        Activate 6 Months Free →
-      </button>
-
-    </form>
-
-    <!-- Success state (hidden until form submitted) -->
-    <div class="success-box" id="success-box">
-      <div class="success-icon">✅</div>
-      <div class="success-title">Check your inbox!</div>
-      <div class="success-sub">
-        Your credentials and APK download link have been sent to<br>
-        <strong id="success-email"></strong><br><br>
-        Check your spam folder if you don't see it within 2 minutes.<br><br>
-        <a href="mailto:hello@shepherdlab.life" style="color:var(--teal)">hello@shepherdlab.life</a> if you need help.
-      </div>
-    </div>
-
-    <!-- Trust row -->
-    <div class="trust-row">
-      <div class="trust-item"><div class="trust-dot"></div>Android only</div>
-      <div class="trust-item"><div class="trust-dot"></div>Cancel anytime</div>
-      <div class="trust-item"><div class="trust-dot"></div>PDPA compliant</div>
-      <div class="trust-item"><div class="trust-dot"></div>NHB Industrial Pte Ltd</div>
+  <!-- Success -->
+  <div class="card success" id="success-box">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Check your inbox!</div>
+    <p class="success-sub">
+      Your credentials and APK download link have been sent to<br>
+      <strong id="success-email"></strong><br><br>
+      Check your spam folder if you don't see it within 2 minutes.
+    </p>
+    <div class="help" style="margin-top:1.5rem">
+      Need help? <a href="mailto:hello@shepherdlab.life">hello@shepherdlab.life</a>
+      · <a href="https://wa.me/6588357181">+65 8835 7181</a>
     </div>
   </div>
 
-</div>
-
-<!-- FAQ -->
-<div class="faq-section">
-  <div class="faq-title">Common questions</div>
-  <div id="faq">
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Where do I find my Shopee order number?</div>
-      <div class="faq-a">Open the Shopee app → tap Me → My Purchases → find your FallGuard+ order → tap it → the Order ID is shown at the top of the order details page.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">I didn't receive the email — what do I do?</div>
-      <div class="faq-a">Check your spam or junk folder first. The email comes from hello@shepherdlab.life. If it's not there after 5 minutes, email us at hello@shepherdlab.life with your Shopee order number and we'll send credentials manually within 24 hours.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">What phone do I need?</div>
-      <div class="faq-a">Any Android phone from 2019 or newer with a front camera and at least 3GB RAM. Android 9.0 or above. Check: Settings → About phone → Android version. iPhone is not supported in this version.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">How do I install an APK file?</div>
-      <div class="faq-a">Download the APK from the link in your email. Tap the downloaded file. Android will ask you to allow installation from unknown sources — tap Settings and enable it. Then tap Install. The full guide is included in your email.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Can I change my plan later?</div>
-      <div class="faq-a">Yes. Email hello@shepherdlab.life and we'll upgrade or downgrade your account. You only pay the difference on your next billing cycle.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Is my data safe?</div>
-      <div class="faq-a">Yes. Your order number and email are stored securely. All monitoring data is processed on your own phone — nothing is uploaded to external servers without your consent. We are PDPA compliant under NHB Industrial Pte Ltd (UEN 202542682D).</div>
-    </div>
-  </div>
 </div>
 
 <footer>
-  <div class="footer-inner">
-    <a href="index.html" class="flogo">Shepherd<span>Lab</span></a>
-    <div class="fb">© 2026 NHB Industrial Pte Ltd (UEN 202542682D). All rights reserved. · PDPA compliant</div>
-  </div>
+  ShepherdLab · NHB Industrial Pte Ltd (UEN 202542682D) ·
+  <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>
 </footer>
 
 <script>
-// ── AUTO-SELECT PLAN FROM URL PARAM ──────────────────────────────────────────
-(function() {
-  var params = new URLSearchParams(window.location.search);
-  var plan = params.get('plan');
-  if (plan === 'pro') {
-    selectedPlan = 'pro';
-    // Will be applied after DOM loads
-    window.addEventListener('DOMContentLoaded', function() { selectPlan('pro'); });
-  }
-})();
-
-// ── PLAN SELECTION ─────────────────────────────────────────────────────────────
-var selectedPlan = 'basic';
-function selectPlan(plan) {
-  selectedPlan = plan;
-  document.getElementById('plan-basic').classList.toggle('selected', plan === 'basic');
-  document.getElementById('plan-pro').classList.toggle('selected', plan === 'pro');
-}
-
-// ── FAQ TOGGLE ────────────────────────────────────────────────────────────────
-function toggleFaq(el) {
-  var item = el.parentElement;
-  item.classList.toggle('open');
-}
-
-// ── FORM SUBMIT ───────────────────────────────────────────────────────────────
-async function handleActivate(e) {
-  if(e) e.preventDefault();
-
-  var orderRaw = document.getElementById('order').value.trim();
-  var email    = document.getElementById('email').value.trim();
-  var errorBox = document.getElementById('error-box');
-  var submitBtn= document.getElementById('submit-btn');
-
-  // Client-side validation
-  if (!orderRaw) {
-    showError('Please enter your Shopee order number.');
-    return;
-  }
-  if (!email) {
-    showError('Please enter your email address.');
-    return;
-  }
-
-  // Clean order number
-  var orderNumber = orderRaw.replace(/[\s\-]/g, '').toUpperCase();
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Activating…';
-  errorBox.style.display = 'none';
-
-  try {
-    var res = await fetch('https://shepherdlab-api.onrender.com/api/activate', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ orderNumber, email, plan: selectedPlan }),
-    });
-
-    var data = await res.json();
-
-    if (!res.ok) {
-      showError(data.error || 'Something went wrong. Please try again.');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Activate & Get Download Link →';
-      return;
-    }
-
-    // Success
-    document.getElementById('activate-form').style.display = 'none';
-    document.getElementById('success-email').textContent  = email;
-    document.getElementById('success-box').style.display  = 'block';
-
-  } catch (err) {
-    showError('Network error. Please check your connection and try again.');
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Activate & Get Download Link →';
-  }
-}
+var API = 'https://shepherdlab-api.onrender.com';
 
 function showError(msg) {
   var box = document.getElementById('error-box');
   box.textContent = msg;
   box.style.display = 'block';
-  box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-// ── STRIPE REDIRECT HANDLER ──────────────────────────────────────────────────
-// If buyer came from Stripe (?session=xxx&source=stripe), auto-fill email
-// and show a "payment confirmed" message
-async function handleStripeReturn() {
-  const params    = new URLSearchParams(window.location.search);
-  const sessionId = params.get('session');
-  const source    = params.get('source');
+function hideError() {
+  document.getElementById('error-box').style.display = 'none';
+}
 
-  if (source !== 'stripe' || !sessionId) return;
+function doActivate() {
+  var order = document.getElementById('inp-order').value.trim();
+  var email = document.getElementById('inp-email').value.trim();
+  var btn   = document.getElementById('submit-btn');
 
-  // Show a "checking payment" banner
-  const banner = document.createElement('div');
-  banner.id    = 'stripe-banner';
-  banner.style.cssText = 'background:rgba(0,168,150,0.12);border:1px solid rgba(0,168,150,0.3);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:0.9rem;color:#E8EDF2;display:flex;gap:0.75rem;align-items:center';
-  banner.innerHTML = '<span style="font-size:1.3rem">💳</span><div><strong style="color:#00A896">Payment confirmed!</strong><br><span style="color:#8BA0B4;font-size:0.82rem">Your card payment was successful. Your account has been created and credentials sent to your email.</span></div>';
+  hideError();
 
-  const form = document.getElementById('activate-form');
-  if (form) form.parentNode.insertBefore(banner, form);
+  if (!order) { showError('Please enter your Shopee order number.'); return; }
+  if (!email || email.indexOf('@') < 0) { showError('Please enter a valid email address.'); return; }
 
-  try {
-    // Fetch session details from our API to get email + plan
-    const res  = await fetch('https://shepherdlab-api.onrender.com/api/stripe/session-status?session_id=' + sessionId);
-    const data = await res.json();
+  btn.disabled    = true;
+  btn.textContent = 'Activating… please wait';
 
-    if (data.paid) {
-      // Pre-fill email and hide the form — account already created by webhook
-      const emailInput = document.getElementById('email');
-      if (emailInput && data.email) emailInput.value = data.email;
+  var body = JSON.stringify({
+    orderNumber: order.replace(/[\s\-]/g, '').toUpperCase(),
+    email:       email,
+    plan:        'basic'
+  });
 
-      // Select correct plan
-      if (data.plan) selectPlan(data.plan);
-
-      // Update banner
-      banner.innerHTML = '<span style="font-size:1.3rem">✅</span><div><strong style="color:#00A896">Payment confirmed — check your inbox!</strong><br><span style="color:#8BA0B4;font-size:0.82rem">Your FallGuard+ credentials have been emailed to <strong style="color:#fff">' + (data.email || 'you') + '</strong>. Check your spam folder if you don't see it within 2 minutes.</span></div>';
-
-      // Hide the form — not needed for Stripe buyers (account already created by webhook)
-      const submitBtn = document.getElementById('submit-btn');
-      if (submitBtn) {
-        submitBtn.style.display = 'none';
-        const note = document.createElement('p');
-        note.style.cssText = 'font-size:0.8rem;color:#8BA0B4;text-align:center;margin-top:0.5rem';
-        note.textContent = 'Your account was created automatically. Check your email for login credentials and the APK download link.';
-        submitBtn.parentNode.appendChild(note);
-      }
+  fetch(API + '/api/activate', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    body
+  })
+  .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, data: data }; }); })
+  .then(function(result) {
+    if (!result.ok) {
+      showError(result.data.error || 'Something went wrong. Please try again.');
+      btn.disabled    = false;
+      btn.textContent = 'Activate 6 Months Free →';
+      return;
     }
-  } catch (err) {
-    // Silent fail — don't break the page
-    console.error('Stripe session check failed:', err);
-  }
+    // Success
+    document.getElementById('success-email').textContent = email;
+    document.getElementById('form-card').style.display   = 'none';
+    document.getElementById('success-box').style.display = 'block';
+  })
+  .catch(function(err) {
+    console.error('Fetch error:', err);
+    showError('Connection error. Please check your internet and try again, or WhatsApp us at +65 8835 7181.');
+    btn.disabled    = false;
+    btn.textContent = 'Activate 6 Months Free →';
+  });
 }
-
-// Run on load
-document.addEventListener('DOMContentLoaded', handleStripeReturn);
 </script>
 
 </body>
