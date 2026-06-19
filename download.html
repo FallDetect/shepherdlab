@@ -210,7 +210,7 @@ footer{background:var(--navy2);border-top:1px solid var(--border);padding:2rem 2
     <div class="error-box" id="error-box"></div>
 
     <!-- Form -->
-    <form id="activate-form" onsubmit="handleActivate(event)">
+    <form id="activate-form" onsubmit="return false;">
 
       <div class="form-group">
         <label for="order">Shopee Order Number</label>
@@ -250,7 +250,7 @@ footer{background:var(--navy2);border-top:1px solid var(--border);padding:2rem 2
         </div>
       </div>
 
-      <button type="submit" class="submit-btn" id="submit-btn">
+      <button type="button" class="submit-btn" id="submit-btn" onclick="handleActivate(event)">
         Activate 6 Months Free →
       </button>
 
@@ -345,7 +345,7 @@ function toggleFaq(el) {
 
 // ── FORM SUBMIT ───────────────────────────────────────────────────────────────
 async function handleActivate(e) {
-  e.preventDefault();
+  if(e) e.preventDefault();
 
   var orderRaw = document.getElementById('order').value.trim();
   var email    = document.getElementById('email').value.trim();
