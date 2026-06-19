@@ -333,6 +333,28 @@ footer{background:var(--navy2);border-top:1px solid var(--border);padding:4rem 2
       <h2 class="stitle" style="text-align:center">Simple, transparent pricing.</h2>
       <p style="font-size:0.95rem;color:var(--muted);text-align:center">No hidden fees. No contracts. App download is free. Cancel anytime.</p>
     </div>
+    <!-- Shopee bundle banner -->
+    <div style="background:rgba(0,168,150,0.08);border:1px solid rgba(0,168,150,0.25);border-radius:14px;padding:1.5rem 2rem;margin-bottom:2rem;max-width:700px;margin-left:auto;margin-right:auto;margin-bottom:2.5rem">
+      <div style="display:flex;align-items:flex-start;gap:1rem;flex-wrap:wrap">
+        <div style="font-size:2rem">🛒</div>
+        <div style="flex:1;min-width:240px">
+          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--teal);margin-bottom:0.4rem">Shopee Wheelchair Bundle</div>
+          <div style="font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:0.4rem">Buy a wheelchair on Shopee — get 6 months FallGuard+ free</div>
+          <div style="font-size:0.85rem;color:var(--muted);line-height:1.65">Each wheelchair purchased on our Shopee store includes 6 months of FallGuard+ Basic at no extra charge. Use your Shopee order number to activate.</div>
+        </div>
+        <a href="https://shopee.sg" target="_blank" rel="noopener" class="btn btn-teal" style="white-space:nowrap;align-self:center">Shop on Shopee →</a>
+      </div>
+      <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(0,168,150,0.15);font-size:0.8rem;color:var(--muted)">
+        Already purchased? <a href="download.html" style="color:var(--teal);text-decoration:none;font-weight:600">Activate your 6 months free →</a>
+      </div>
+    </div>
+
+    <!-- Standalone subscription plans -->
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div class="slbl" style="text-align:center">Or subscribe directly</div>
+      <p style="font-size:0.88rem;color:var(--muted)">Don't have a Shopee wheelchair bundle? Subscribe directly below.</p>
+    </div>
+
     <div class="price-grid">
       <div class="pc">
         <div class="plan-name">Basic</div>
@@ -348,7 +370,7 @@ footer{background:var(--navy2);border-top:1px solid var(--border);padding:4rem 2
           <li class="no">Weekly PDF family report</li>
           <li class="no">Fall risk AI score</li>
         </ul>
-        <a href="mailto:hello@shepherdlab.life?subject=FallGuard+ Basic" class="btn btn-outline-fg" style="width:100%;text-align:center;display:block">Get started</a>
+        <a href="#" onclick="startStripe('basic');return false;" class="btn btn-outline-fg" style="width:100%;text-align:center;display:block">Subscribe — Pay by Card →</a>
       </div>
       <div class="pc featured">
         <div class="feat-tag">Most popular</div>
@@ -365,10 +387,10 @@ footer{background:var(--navy2);border-top:1px solid var(--border);padding:4rem 2
           <li>Multi-caregiver access</li>
           <li>Priority support</li>
         </ul>
-        <a href="mailto:hello@shepherdlab.life?subject=FallGuard+ Pro" class="btn btn-teal" style="width:100%;text-align:center;display:block">Get started</a>
+        <a href="#" onclick="startStripe('pro');return false;" class="btn btn-teal" style="width:100%;text-align:center;display:block">Subscribe — Pay by Card →</a>
       </div>
     </div>
-    <p style="text-align:center;margin-top:1.5rem;font-size:0.8rem;color:var(--muted)">Phone holder ~$10 one-time from Shopee · App download free · Cancel anytime</p>
+    <p style="text-align:center;margin-top:1.5rem;font-size:0.8rem;color:var(--muted)">Visa / Mastercard · Cancel anytime · No contract · App download free</p>
   </div>
 </section>
 
@@ -420,5 +442,35 @@ footer{background:var(--navy2);border-top:1px solid var(--border);padding:4rem 2
   </div>
 </footer>
 
+
+<script>
+async function startStripe(plan) {
+  const btn = event.target;
+  btn.textContent = 'Redirecting...';
+  btn.style.opacity = '0.6';
+  btn.style.pointerEvents = 'none';
+  try {
+    const res  = await fetch('https://shepherdlab-api.onrender.com/api/stripe/create-checkout', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ plan }),
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert(data.error || 'Could not start checkout. Please email hello@shepherdlab.life');
+      btn.textContent = 'Pay by card (Visa / Mastercard)';
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+    }
+  } catch (err) {
+    alert('Network error. Please try again or email hello@shepherdlab.life');
+    btn.textContent = 'Pay by card (Visa / Mastercard)';
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+  }
+}
+</script>
 </body>
 </html>
